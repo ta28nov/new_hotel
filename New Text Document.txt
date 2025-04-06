@@ -1,0 +1,56 @@
+BE
+dotnet new webapi -n HotelManagementAPI
+cd HotelManagementAPI
+
+# Cài đặt các package cần thiết
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+dotnet add package BCrypt.Net-Next
+
+
+
+dotnet add package Microsoft.EntityFrameworkCore --version 7.0.20
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.20
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.20
+dotnet add package Microsoft.IdentityModel.Tokens --version 7.0.2
+dotnet add package System.IdentityModel.Tokens.Jwt --version 7.0.2
+
+
+Chạy lệnh `dotnet run` trong thư mục dự án
+Truy cập Swagger UI tại `https://localhost:5001/swagger` hoặc `http://localhost:5000/swagger`
+
+## dotnet run
+Email: [admin@hotel.com](mailto:admin@hotel.com)
+Mật khẩu: Admin@123
+FE 
+DB
+## Thông tin đăng nhập mẫu
+
+Script đã tạo sẵn các tài khoản mẫu để bạn có thể đăng nhập và sử dụng ngay:
+
+1. **Tài khoản Admin**:
+
+1. Email: [admin@hotel.com](mailto:admin@hotel.com)
+2. Mật khẩu: Admin@123
+
+
+
+2. **Tài khoản Nhân viên**:
+
+1. Email: [employee@hotel.com](mailto:employee@hotel.com)
+2. Mật khẩu: Employee@123
+
+
+
+3. **Tài khoản Khách hàng**:
+
+1. Email: [john@example.com](mailto:john@example.com)
+2. Mật khẩu: Customer@123
+
+
+hoặc
+
+1. Email: [jane@example.com](mailto:jane@example.com)
+2. Mật khẩu: Customer@123
