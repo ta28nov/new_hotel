@@ -3097,11 +3097,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\hotel-management\\HotelManagementAPI\\HotelManagementAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Filehoanchinh\\new_hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
       "projectName": "HotelManagementAPI",
-      "projectPath": "C:\\Users\\Admin\\hotel-management\\HotelManagementAPI\\HotelManagementAPI.csproj",
+      "projectPath": "C:\\Users\\Admin\\Filehoanchinh\\new_hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\hotel-management\\HotelManagementAPI\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Filehoanchinh\\new_hotel\\HotelManagementAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

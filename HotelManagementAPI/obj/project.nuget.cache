@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IcSBp3DS01nryM/NzkOPkyiIs5V1CBqQ6+aPUA1u2bY+0crxNECwRS3d9m3wrQYO5MCEsA4pEKUac8q1FEiRIA==",
+  "dgSpecHash": "HvLF/rFZxgLE1o7IYoL4oG2RD2yhRa/adj0cqx64JsIuHGxK5br4Q9+jUg/TMw1HnB7MyVE9IG+XMLU8ICn6yg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\hotel-management\\HotelManagementAPI\\HotelManagementAPI.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Filehoanchinh\\new_hotel\\HotelManagementAPI\\HotelManagementAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

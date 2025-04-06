@@ -22,9 +22,11 @@ CREATE TABLE Users (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
     Email NVARCHAR(100) NOT NULL UNIQUE,
-    Password NVARCHAR(255) NOT NULL,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    PhoneNumber NVARCHAR(20) NULL,
     Role NVARCHAR(20) NOT NULL CHECK (Role IN ('admin', 'employee', 'customer')),
-    CreatedAt DATETIME DEFAULT GETDATE()
+    CreatedAt DATETIME DEFAULT GETUTCDATE(),
+    UpdatedAt DATETIME NULL
 );
 GO
 
@@ -241,14 +243,12 @@ END
 GO
 
 -- Thêm dữ liệu mẫu
-
--- Thêm người dùng
-INSERT INTO Users (Name, Email, Password, Role)
+INSERT INTO Users (Name, Email, PasswordHash, Role)
 VALUES 
-('Admin User', 'admin@hotel.com', 'hashed_password_here', 'admin'),
-('Employee User', 'employee@hotel.com', 'hashed_password_here', 'employee'),
-('John Doe', 'john@example.com', 'hashed_password_here', 'customer'),
-('Jane Smith', 'jane@example.com', 'hashed_password_here', 'customer');
+('Admin User', 'admin@hotel.com', '$2a$11$U.jCKv9gt10jOT8vY57XiuGy4pMQmB4KmSiOSF1OOoMWCFd7k/LDO', 'admin'),
+('Employee User', 'employee@hotel.com', '$2a$11$8QvADLl6Iq7DLmwhYjKy2ePTlofS02jCZGmnVsRD0rWTyMEnyh2au', 'employee'),
+('John Doe', 'john@example.com', '$2a$11$aOXUCJgTTiqGVD8iL1kUf.DqOAs2/vWsOKoYW5KlR7uUDxRNwNUEO', 'customer'),
+('Jane Smith', 'jane@example.com', '$2a$11$JqInp3Z.uwo.aMMydG5Xm.Dpjo.J6nYYQW0kpE5MCef1aGXihdMRe', 'customer');
 GO
 
 -- Thêm loại phòng
