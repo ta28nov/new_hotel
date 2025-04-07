@@ -10,11 +10,11 @@ import "./UserProfilePage.css"
 const UserProfilePage = () => {
   // Sample user data
   const [userData, setUserData] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+1 (555) 123-4567",
-    address: "123 Main Street, New York, NY 10001",
+    firstName: "Thầy",
+    lastName: "SẸO",
+    email: "admin@hotel.com",
+    phone: "0345543986",
+    address: "LHU Khoa CNTTCNTT",
     joinDate: "January 15, 2023",
   })
 

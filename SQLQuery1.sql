@@ -35,12 +35,12 @@ CREATE TABLE RoomTypes (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(50) NOT NULL,
     Description NVARCHAR(MAX),
-    BasePrice DECIMAL(10, 2) NOT NULL,
+    BasePrice DECIMAL(10,2) NOT NULL,
     Capacity INT NOT NULL
 );
 GO
 
--- Tạo bảng Rooms
+--  Tạo bảng Rooms
 CREATE TABLE Rooms (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     RoomNumber NVARCHAR(10) NOT NULL UNIQUE,
@@ -116,7 +116,7 @@ CREATE TABLE BookingServices (
 );
 GO
 
--- Tạo bảng RoomAmenities
+--  Tạo bảng RoomAmenities
 CREATE TABLE RoomAmenities (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     RoomTypeId INT NOT NULL,
@@ -125,12 +125,21 @@ CREATE TABLE RoomAmenities (
 );
 GO
 
--- Tạo bảng RoomImages
+--  Tạo bảng RoomImages
 CREATE TABLE RoomImages (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     RoomTypeId INT NOT NULL,
     ImageUrl NVARCHAR(255) NOT NULL,
     IsPrimary BIT NOT NULL DEFAULT 0,
+    FOREIGN KEY (RoomTypeId) REFERENCES RoomTypes(Id)
+);
+GO
+
+--  Tạo bảng Beds (chỉ chứa thông tin BedCount)
+CREATE TABLE Beds (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    RoomTypeId INT NOT NULL,
+    BedCount INT NOT NULL,
     FOREIGN KEY (RoomTypeId) REFERENCES RoomTypes(Id)
 );
 GO
@@ -251,16 +260,16 @@ VALUES
 ('Jane Smith', 'jane@example.com', '$2a$11$JqInp3Z.uwo.aMMydG5Xm.Dpjo.J6nYYQW0kpE5MCef1aGXihdMRe', 'customer');
 GO
 
--- Thêm loại phòng
+-- 6. Chèn dữ liệu mẫu cho bảng RoomTypes
 INSERT INTO RoomTypes (Name, Description, BasePrice, Capacity)
 VALUES 
-('Standard', 'Comfortable room with essential amenities', 100.00, 2),
-('Deluxe', 'Spacious room with premium amenities', 150.00, 2),
-('Suite', 'Luxury suite with separate living area', 250.00, 4),
-('Family', 'Large room suitable for families', 200.00, 5);
+('Standard Room', 'A comfortable room with all the essential amenities for a pleasant stay.', 150.00, 2),
+('Deluxe Room', 'Spacious room with premium furnishings and additional amenities.', 250.00, 2),
+('Executive Suite', 'Luxurious suite with separate living area and exclusive services.', 350.00, 3),
+('Family Suite', 'Spacious suite designed for families with connecting rooms.', 400.00, 4);
 GO
 
--- Thêm phòng
+-- 7. Chèn dữ liệu mẫu cho bảng Rooms
 INSERT INTO Rooms (RoomNumber, RoomTypeId, Status, Floor)
 VALUES 
 ('101', 1, 'available', 1),
@@ -272,22 +281,95 @@ VALUES
 ('401', 4, 'available', 4),
 ('402', 4, 'available', 4);
 GO
+-- 8. Chèn dữ liệu mẫu cho bảng RoomAmenities
 
--- Thêm tiện nghi phòng
+-- Dữ liệu cho Standard Room (RoomTypeId = 1)
 INSERT INTO RoomAmenities (RoomTypeId, Name)
 VALUES 
 (1, 'Wi-Fi'),
 (1, 'TV'),
-(1, 'Air Conditioning'),
+(1, 'Coffee'),
+(1, 'Bath');
+
+-- Dữ liệu cho Deluxe Room (RoomTypeId = 2)
+INSERT INTO RoomAmenities (RoomTypeId, Name)
+VALUES 
 (2, 'Wi-Fi'),
 (2, 'TV'),
-(2, 'Mini Bar'),
+(2, 'Coffee'),
+(2, 'Bath'),
+(2, 'Minibar');
+
+-- Dữ liệu cho Executive Suite (RoomTypeId = 3)
+INSERT INTO RoomAmenities (RoomTypeId, Name)
+VALUES 
 (3, 'Wi-Fi'),
-(3, 'Jacuzzi'),
-(3, 'Separate Living Area'),
+(3, 'TV'),
+(3, 'Coffee'),
+(3, 'Bath'),
+(3, 'Minibar'),
+(3, 'Workspace');
+
+-- Dữ liệu cho Family Suite (RoomTypeId = 4)
+INSERT INTO RoomAmenities (RoomTypeId, Name)
+VALUES 
 (4, 'Wi-Fi'),
-(4, 'Extra Beds'),
-(4, 'Microwave');
+(4, 'TV'),
+(4, 'Coffee'),
+(4, 'Bath'),
+(4, 'Minibar'),
+(4, 'Kitchen');
+GO
+
+-- 9. Chèn dữ liệu mẫu cho bảng RoomImages
+
+-- Standard Room (RoomTypeId = 1)
+INSERT INTO RoomImages (RoomTypeId, ImageUrl, IsPrimary)
+VALUES 
+(1, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 1),
+(1, 'https://images.unsplash.com/photo-1552902019-ebcd97aa9aa0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80', 0);
+
+-- Deluxe Room (RoomTypeId = 2)
+INSERT INTO RoomImages (RoomTypeId, ImageUrl, IsPrimary)
+VALUES 
+(2, 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 1),
+(2, 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80', 0);
+
+-- Executive Suite (RoomTypeId = 3)
+INSERT INTO RoomImages (RoomTypeId, ImageUrl, IsPrimary)
+VALUES 
+(3, 'https://images.unsplash.com/photo-1591088398332-8a7791972843?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 1),
+(3, 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80', 0);
+
+-- Family Suite (RoomTypeId = 4)
+INSERT INTO RoomImages (RoomTypeId, ImageUrl, IsPrimary)
+VALUES 
+(4, 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80', 1),
+(4, 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80', 0);
+GO
+
+-- 10. Chèn dữ liệu mẫu cho bảng Beds (chỉ chứa BedCount)
+INSERT INTO Beds (RoomTypeId, BedCount)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+GO
+
+-- 11. Tạo hàm dbo.GetBedCount để lấy số lượng giường theo RoomTypeId
+CREATE FUNCTION dbo.GetBedCount(@RoomTypeId INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @bedCount INT;
+
+    SELECT @bedCount = BedCount
+    FROM Beds
+    WHERE RoomTypeId = @RoomTypeId;
+
+    RETURN @bedCount;
+END;
 GO
 
 -- Thêm khách hàng
@@ -344,18 +426,6 @@ VALUES
 (4, 5, 1, 30.00, '2023-04-23');
 GO
 
--- Thêm hình ảnh phòng
-INSERT INTO RoomImages (RoomTypeId, ImageUrl, IsPrimary)
-VALUES 
-(1, '/images/rooms/standard-1.jpg', 1),
-(1, '/images/rooms/standard-2.jpg', 0),
-(2, '/images/rooms/deluxe-1.jpg', 1),
-(2, '/images/rooms/deluxe-2.jpg', 0),
-(3, '/images/rooms/suite-1.jpg', 1),
-(3, '/images/rooms/suite-2.jpg', 0),
-(4, '/images/rooms/family-1.jpg', 1),
-(4, '/images/rooms/family-2.jpg', 0);
-GO
 
 -- Thêm hóa đơn
 INSERT INTO Invoices (BookingId, InvoiceNumber, IssuedDate, TotalAmount, Tax, Status)

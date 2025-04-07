@@ -19,7 +19,17 @@ const authService = {
 
   register: async (userData) => {
     try {
-      return await authEndpoints.register(userData)
+      // Chuyển đổi dữ liệu frontend thành định dạng mà backend yêu cầu
+      const payload = {
+        Name: `${userData.firstName} ${userData.lastName}`.trim(),
+        Email: userData.email,
+        Password: userData.password,
+        PasswordConfirmation: userData.confirmPassword,
+        PhoneNumber: userData.phone || "", // optional
+      }
+
+      // Gọi API và gửi dữ liệu đã chuyển đổi
+      return await authEndpoints.register(payload)
     } catch (error) {
       console.error("Lỗi đăng ký:", error)
       throw error

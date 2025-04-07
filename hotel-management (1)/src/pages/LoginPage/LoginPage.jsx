@@ -7,6 +7,7 @@ import { FaEnvelope, FaLock, FaGoogle, FaFacebookF } from "react-icons/fa"
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
 import "./LoginPage.css"
+import { useAuth } from "../../context/AuthContext";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,9 @@ const LoginPage = () => {
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  // Lấy hàm login từ AuthContext (AuthContext sẽ xử lý gọi API và chuyển hướng)
+  const { login } = useAuth()
 
   // Cuộn lên đầu trang khi component được tải
   useEffect(() => {
@@ -58,19 +62,21 @@ const LoginPage = () => {
     return Object.keys(newErrors).length === 0
   }
 
-  // Xử lý đăng nhập
-  const handleLogin = (e) => {
+  // Xử lý đăng nhập, gọi API thông qua AuthContext
+  const handleLogin = async (e) => {
     e.preventDefault()
 
     if (validateForm()) {
       setIsSubmitting(true)
-
-      // Mô phỏng API call
-      setTimeout(() => {
+      try {
+        // Gọi hàm login từ AuthContext, hàm này sẽ tự động lưu token, cập nhật currentUser và chuyển hướng dựa theo vai trò người dùng.
+        await login(formData.email, formData.password)
+      } catch (error) {
+        // Các lỗi đã được xử lý bên trong AuthContext, bạn có thể log lỗi nếu cần.
+        console.error("Login error:", error)
+      } finally {
         setIsSubmitting(false)
-        // Chuyển hướng đến trang chủ sau khi đăng nhập thành công
-        window.location.href = "/admin"
-      }, 1500)
+      }
     }
   }
 
@@ -184,4 +190,3 @@ const LoginPage = () => {
 }
 
 export default LoginPage
-

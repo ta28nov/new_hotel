@@ -1,3 +1,5 @@
+
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -8,7 +10,7 @@ import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
 import "./RoomDetailPage.css"
 
-// Dữ liệu mẫu cho phòng
+// Dữ liệu mẫu cho chi tiết phòng
 const allRooms = [
   {
     id: 1,
